@@ -140,7 +140,7 @@ catkin_init_workspace
 git clone git@github.com:haicheng12/McKnum_car_sim.git
 
 catkin_make
-``
+```
 
 仿真环境启动：
 ```
