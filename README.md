@@ -12,8 +12,96 @@
 6、cartographer建图、保存地图
 
 ————2023年4月12号
+1、添加cartographer编译运行步骤
+2、新建两个额外的仓库存放依赖文件和cartographer_ros文件
 
+```
+**整体文件目录**
 
+分为三个仓库保存，分别是：
+McKnum_car_sim 小车的导航仿真代码
+carto_file 运行cartographer的依赖文件
+carto_ws cartographer的工作空间
+
+安装ceres包：
+```
+# CMake
+sudo apt-get install cmake
+# google-glog + gflags
+sudo apt-get install libgoogle-glog-dev libgflags-dev
+# BLAS & LAPACK
+sudo apt-get install libatlas-base-dev
+# Eigen3
+sudo apt-get install libeigen3-dev
+# SuiteSparse and CXSparse (optional)
+sudo apt-get install libsuitesparse-dev
+```
+
+进入ceres执行下面的命令：
+```
+mkdir build
+cmake ..
+make//这个过程非常的漫长
+sudo make install
+```
+
+安装protobuf3：
+```
+sudo apt-get install autoconf automake libtool curl make g++ unzip//安装依赖
+cd protobuf
+cd protobuf
+./autogen.sh
+./configure
+make
+make check
+sudo make install
+sudo ldconfig// 输出protobuf版本信息则表示安装成功
+protoc --version
+```
+
+安装cartographer包：
+```
+sudo apt-get install -y \
+    g++ \
+    git \
+    google-mock \
+    libboost-all-dev \
+    libcairo2-dev \
+    libeigen3-dev \
+    libgflags-dev \
+    libgoogle-glog-dev \
+    liblua5.2-dev \
+    libsuitesparse-dev \
+    ninja-build \
+    python-sphinx
+```
+
+```
+cd cartographer
+mkdir build
+cmake .. -G Ninja//可能报错误一，解决办法见错误一。还有可能错误二，解决办法见错误二
+ninja//需要很长时间
+ninja test
+sudo ninja install
+```
+
+如果有错误：
+错误一：provided by "absl"
+```
+sudo apt-get install stow
+sudo chmod +x ~/cartographer/src/cartographer/scripts/install_abseil.sh//相对路径
+cd ~/cartographer/src/cartographer/scripts
+./install_abseil.sh
+```
+错误二：Did not find Lua >= 5.2.
+```
+sudo apt-get install liblua5.2-dev
+```
+
+编译cartographer_ros：
+```
+catkin_make_isolated --install --use-ninja//需要很长时间
+source install_isolated/setup.bash
 ```
 
 **仿真测试**
