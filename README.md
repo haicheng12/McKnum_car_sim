@@ -31,8 +31,8 @@ ros melodic
 McKnum_car_sim 小车的导航仿真代码
 carto_file 运行cartographer的依赖文件
 carto_ws cartographer的工作空间
-
 ```
+
 下载protobuf和cartographer包：
 ```
 git clone git@github.com:haicheng12/carto_file.git //下载完自行解压里面两个压缩包
@@ -125,7 +125,7 @@ mkdir -p ~/carto_ws/src
 cd carto_ws/src
 catkin_init_workspace
 git clone git@github.com:haicheng12/carto_ws.git
-
+cd ~/carto_ws
 catkin_make_isolated --install --use-ninja//需要很长时间
 source install_isolated/setup.bash
 ```
@@ -138,7 +138,7 @@ mkdir -p ~/catkin_ws/src
 cd catkin_ws/src
 catkin_init_workspace
 git clone git@github.com:haicheng12/McKnum_car_sim.git
-
+cd ~/catkin_ws
 catkin_make
 ```
 
