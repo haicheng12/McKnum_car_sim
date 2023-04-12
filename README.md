@@ -35,7 +35,7 @@ carto_ws cartographer的工作空间
 ```
 下载protobuf和cartographer包：
 ```
-git clone git@github.com:haicheng12/carto_file.git
+git clone git@github.com:haicheng12/carto_file.git //下载完自行解压里面两个压缩包
 ```
 
 下载ceres包：
@@ -133,7 +133,7 @@ source install_isolated/setup.bash
 **仿真测试**
 
 编译代码：
-``
+```
 mkdir -p ~/catkin_ws/src
 cd catkin_ws/src
 catkin_init_workspace
