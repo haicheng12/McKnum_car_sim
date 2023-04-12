@@ -151,6 +151,11 @@ $ roslaunch atom atom_world.launch
 $ rosrun atom teleop_cmd_vel
 ```
 
+安装navigation依赖环境：
+```
+sudo apt install ros-melodic-navigation
+```
+
 **gmapping建图**
 
 启动建图：
