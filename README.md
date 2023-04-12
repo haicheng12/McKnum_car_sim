@@ -11,9 +11,13 @@
 5、amcl定位，move_base导航
 6、cartographer建图、保存地图
 
+————2023年4月12号
+
+
 ```
 
 **仿真测试**
+
 仿真环境启动：
 ```
 $ roslaunch atom atom_world.launch
@@ -24,6 +28,7 @@ $ rosrun atom teleop_cmd_vel
 ```
 
 **gmapping建图**
+
 启动建图：
 ```
 $ roslaunch atom gmapping.launch
@@ -40,6 +45,7 @@ $ rosrun map_server map_saver -f map
 ```
 
 **amcl定位和move_base导航**
+
 启动定位和导航：
 ```
 $ roslaunch atom navigation.launch
@@ -47,6 +53,7 @@ $ roslaunch atom navigation.launch
 
 
 **cartographer建图**
+
 仿真环境启动：
 ```
 $ roslaunch atom atom_world.launch
