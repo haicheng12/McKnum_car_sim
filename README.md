@@ -16,12 +16,33 @@
 2、新建两个额外的仓库存放依赖文件和cartographer_ros文件
 
 ```
+
+**系统环境**
+
+```
+ubuntu 18.04
+ros melodic
+```
+
 **整体文件目录**
 
 分为三个仓库保存，分别是：
+```
 McKnum_car_sim 小车的导航仿真代码
 carto_file 运行cartographer的依赖文件
 carto_ws cartographer的工作空间
+
+```
+下载protobuf和cartographer包：
+```
+git clone git@github.com:haicheng12/carto_file.git
+```
+
+下载ceres包：
+```
+cd carto_file
+git clone https://github.com/ceres-solver/ceres-solver.git
+```
 
 安装ceres包：
 ```
@@ -100,11 +121,26 @@ sudo apt-get install liblua5.2-dev
 
 编译cartographer_ros：
 ```
+mkdir -p ~/carto_ws/src
+cd carto_ws/src
+catkin_init_workspace
+git clone git@github.com:haicheng12/carto_ws.git
+
 catkin_make_isolated --install --use-ninja//需要很长时间
 source install_isolated/setup.bash
 ```
 
 **仿真测试**
+
+编译代码：
+``
+mkdir -p ~/catkin_ws/src
+cd catkin_ws/src
+catkin_init_workspace
+git clone git@github.com:haicheng12/McKnum_car_sim.git
+
+catkin_make
+``
 
 仿真环境启动：
 ```
@@ -129,7 +165,7 @@ $ rosrun atom teleop_cmd_vel
 
 保存地图：
 ```
-$ rosrun map_server map_saver -f map
+$ rosrun map_server map_saver -f map //保存的地图map.pgm和map.yaml放到atom/maps/
 ```
 
 **amcl定位和move_base导航**
@@ -234,12 +270,12 @@ $ rosservice call /write_state  "filename: '/home/ubuntu/map.pbstream'
 include_unfinished_submaps: false" 
 status: 
   code: 0
-  message: "State written to '/home/ubuntu/map.pbstream'."
+  message: "State written to '/home/ubuntu/map.pbstream'." //ubuntu改为自己电脑的名字
 
 ```
 转化地图：
 ```
-$ rosrun cartographer_ros cartographer_pbstream_to_ros_map  -map_filestem=/home/ubuntu/map -pbstream_filename=/home/ubuntu/map.pbstream -resolution=0.05
+$ rosrun cartographer_ros cartographer_pbstream_to_ros_map  -map_filestem=/home/ubuntu/map -pbstream_filename=/home/ubuntu/map.pbstream -resolution=0.05 //ubuntu改为自己电脑的名字
 ```
 
 
