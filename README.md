@@ -285,8 +285,8 @@ $ rosrun cartographer_ros cartographer_pbstream_to_ros_map  -map_filestem=/home/
 
 **仿真效果**
 
-![Image text](https://github.com/haicheng12/yolo_rotation/blob/main/img/yolo.png)
-![Image text](https://github.com/haicheng12/yolo_rotation/blob/main/img/yolo.png)
+![Image text](https://github.com/haicheng12/McKnum_car_sim/blob/main/img/carto_img.jpg)
+![Image text](https://github.com/haicheng12/McKnum_car_sim/blob/main/img/gazebo_world.png)
 
 
 
