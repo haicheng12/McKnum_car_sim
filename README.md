@@ -283,7 +283,10 @@ status:
 $ rosrun cartographer_ros cartographer_pbstream_to_ros_map  -map_filestem=/home/ubuntu/map -pbstream_filename=/home/ubuntu/map.pbstream -resolution=0.05 //ubuntu改为自己电脑的名字
 ```
 
+**仿真效果**
 
+![Image text](https://github.com/haicheng12/yolo_rotation/blob/main/img/yolo.png)
+![Image text](https://github.com/haicheng12/yolo_rotation/blob/main/img/yolo.png)
 
 
 
