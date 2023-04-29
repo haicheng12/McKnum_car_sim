@@ -40,10 +40,10 @@ carto_ws cartographer的工作空间
 git clone git@github.com:haicheng12/carto_file.git //下载完自行解压里面两个压缩包
 ```
 
-下载ceres包：
+下载ceres包，然后复制到carto_file文件夹：
 ```
-cd carto_file
-git clone https://github.com/ceres-solver/ceres-solver.git
+https://github.com/ceres-solver/ceres-solver.git
+//注意下载2.1.0，否则后面会有编译报错，在TAB里面选择
 ```
 
 安装ceres包：
@@ -63,6 +63,7 @@ sudo apt-get install libsuitesparse-dev
 进入ceres执行下面的命令：
 ```
 mkdir build
+cd build
 cmake ..
 make//这个过程非常的漫长
 sudo make install
