@@ -217,5 +217,6 @@ include_directories(
 add_executable(teleop_cmd_vel src/teleop_cmd_vel.cpp)
 target_link_libraries(teleop_cmd_vel ${catkin_LIBRARIES})
 
-
+add_executable(pub_local_pose src/pub_local_pose.cpp)
+target_link_libraries(pub_local_pose ${catkin_LIBRARIES})
 

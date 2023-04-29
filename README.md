@@ -15,6 +15,8 @@
 1、添加cartographer编译运行步骤
 2、新建两个额外的仓库存放依赖文件和cartographer_ros文件
 
+————2023年4月29号
+1、增加cartographer跑move_base接口
 ```
 
 **系统环境**
@@ -282,6 +284,89 @@ status:
 ```
 $ rosrun cartographer_ros cartographer_pbstream_to_ros_map  -map_filestem=/home/ubuntu/map -pbstream_filename=/home/ubuntu/map.pbstream -resolution=0.05 //ubuntu改为自己电脑的名字
 ```
+
+**cartographer跑move_base**
+
+1、修改的东西：
+navigation.launch，去掉amcl的加载
+```
+  <!-- AMCL -->
+  <!--include file="$(find atom)/launch/amcl.launch"/-->
+```
+
+2、启动的东西：
+```
+$ rosrun atom pub_local_pose
+```
+
+3、cartographer_ros修改的配置：
+demo_back_pack_2d_localization.launch
+```
+<!-- -->
+<launch>
+  <param name="/use_sim_time" value="true" />
+
+  <node name="cartographer_node" pkg="cartographer_ros"
+      type="cartographer_node" args="
+          -configuration_directory $(find cartographer_ros)/configuration_files
+          -configuration_basename backpack_2d_localization.lua
+          -load_state_filename /home/ubuntu/map.pbstream" 
+      output="screen">
+  </node>
+
+  <node name="map_server" pkg="map_server" type="map_server" 
+    args="/home/ubuntu/map.yaml" />
+
+  <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+      type="cartographer_occupancy_grid_node" args="-resolution 0.05"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" required="true"
+      args="-d $(find cartographer_ros)/configuration_files/demo_2d.rviz" />
+
+</launch>
+```
+backpack_2d.lua
+```
+include "map_builder.lua"
+include "trajectory_builder.lua"
+
+options = {
+  map_builder = MAP_BUILDER,
+  trajectory_builder = TRAJECTORY_BUILDER,
+  map_frame = "map",
+  tracking_frame = "base_link",
+  published_frame = "base_link",
+  odom_frame = "odom",
+  provide_odom_frame = true,
+  publish_frame_projected_to_2d = false,
+  use_pose_extrapolator = true,
+  use_odometry = true,
+  use_nav_sat = false,
+  use_landmarks = false,
+  num_laser_scans = 1,
+  num_multi_echo_laser_scans = 0,
+  num_subdivisions_per_laser_scan = 1,
+  num_point_clouds = 0,
+  lookup_transform_timeout_sec = 0.2,
+  submap_publish_period_sec = 0.3,
+  pose_publish_period_sec = 5e-3,
+  trajectory_publish_period_sec = 30e-3,
+  rangefinder_sampling_ratio = 1.,
+  odometry_sampling_ratio = 1.,
+  fixed_frame_pose_sampling_ratio = 1.,
+  imu_sampling_ratio = 1.,
+  landmarks_sampling_ratio = 1.,
+}
+
+MAP_BUILDER.use_trajectory_builder_2d = true
+POSE_GRAPH.optimize_every_n_nodes = 20
+
+TRAJECTORY_BUILDER_2D.min_range = 0.1
+TRAJECTORY_BUILDER_2D.max_range = 20.0
+
+return options
+```
+
 
 **仿真效果**
 

@@ -30,10 +30,10 @@ class TeleopPR2Keyboard //定义键盘的类
     cmd.linear.x = cmd.linear.y = cmd.angular.z = 0; //初始速度
     vel_pub_ = n_.advertise<geometry_msgs::Twist>("cmd_vel", 1);//发布的主题
     ros::NodeHandle n_private("~");
-    n_private.param("walk_vel", walk_vel, 2.0);//这里给各个定义的东西参数配置
-    n_private.param("run_vel", run_vel, 2.0);
-    n_private.param("yaw_rate", yaw_rate,2.0);
-    n_private.param("yaw_run_rate", yaw_rate_run, 3.0);
+    n_private.param("walk_vel", walk_vel, 1.0);//这里给各个定义的东西参数配置
+    n_private.param("run_vel", run_vel, 1.0);
+    n_private.param("yaw_rate", yaw_rate,1.0);
+    n_private.param("yaw_run_rate", yaw_rate_run, 1.0);
   }
   ~TeleopPR2Keyboard()   { }
   void keyboardLoop();
